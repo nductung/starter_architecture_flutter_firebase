@@ -1,4 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +20,12 @@ Future<void> main() async {
   registerErrorHandlers();
   // * Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseUIAuth.configureProviders([
+    AppleProvider(),
+    GoogleProvider(
+        clientId:
+            "12723743760-bjbrbba99c52vjr29305n7l5h5cir94r.apps.googleusercontent.com"),
+  ]);
   // * Entry point of the app
   runApp(const ProviderScope(
     child: MyApp(),

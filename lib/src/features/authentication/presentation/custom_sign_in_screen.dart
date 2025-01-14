@@ -1,10 +1,17 @@
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:starter_architecture_flutter_firebase/src/constants/app_sizes.dart';
 import 'package:starter_architecture_flutter_firebase/src/features/authentication/data/firebase_auth_repository.dart';
-
+import 'package:crypto/crypto.dart';
 import 'auth_providers.dart';
+import 'dart:convert';
 
 class CustomSignInScreen extends ConsumerWidget {
   const CustomSignInScreen({super.key});
@@ -32,20 +39,12 @@ class SignInAnonymouslyFooter extends ConsumerWidget {
     return Column(
       children: [
         gapH8,
-        const Row(
-          children: [
-            Expanded(child: Divider()),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: Sizes.p8),
-              child: Text('or'),
-            ),
-            Expanded(child: Divider()),
-          ],
-        ),
-        TextButton(
-          onPressed: () => ref.read(firebaseAuthProvider).signInAnonymously(),
-          child: const Text('Sign in anonymously'),
-        ),
+        OAuthProviderButton(
+            provider: GoogleProvider(
+                clientId:
+                    "12723743760-bjbrbba99c52vjr29305n7l5h5cir94r.apps.googleusercontent.com")),
+        gapH8,
+        OAuthProviderButton(provider: AppleProvider()),
       ],
     );
   }
