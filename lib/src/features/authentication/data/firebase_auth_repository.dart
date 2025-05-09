@@ -14,6 +14,24 @@ class AuthRepository {
   Future<void> signInAnonymously() {
     return _auth.signInAnonymously();
   }
+  
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
+    await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+  
+  Future<void> createUserWithEmailAndPassword(String email, String password) async {
+    await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+  
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
 }
 
 @Riverpod(keepAlive: true)

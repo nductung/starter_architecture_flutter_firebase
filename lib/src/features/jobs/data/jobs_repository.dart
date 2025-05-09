@@ -30,7 +30,7 @@ class JobsRepository {
       });
 
   // update
-  Future<void> updateJob({required UserID uid, required Job job}) =>
+  Future<void> updateJob({required UserID uid, required Joimb job}) =>
       _firestore.doc(jobPath(uid, job.id)).update(job.toMap());
 
   // delete

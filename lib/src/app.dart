@@ -2,7 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:force_update_helper/force_update_helper.dart';
+import 'package:starter_architecture_flutter_firebase/src/localization/app_localizations.dart';
+import 'package:starter_architecture_flutter_firebase/src/localization/app_locale_provider.dart';
 import 'package:starter_architecture_flutter_firebase/src/routing/app_router.dart';
 import 'package:starter_architecture_flutter_firebase/src/routing/app_startup.dart';
 import 'package:starter_architecture_flutter_firebase/src/routing/go_router_delegate_listener.dart';
@@ -17,8 +20,20 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goRouter = ref.watch(goRouterProvider);
+    // Watch the current locale
+    final locale = ref.watch(appLocaleProvider);
+    
     return MaterialApp.router(
       routerConfig: goRouter,
+      // Localization setup
+      locale: locale,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       builder: (_, child) {
         // * Important: Use AppStartupWidget to wrap ForceUpdateWidget otherwise you will get this error:
         // * Navigator operation requested with a context that does not include a Navigator.

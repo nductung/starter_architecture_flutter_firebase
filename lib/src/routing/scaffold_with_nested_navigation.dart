@@ -61,21 +61,29 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentIndex,
         destinations: [
-          // products
+          // Home
           NavigationDestination(
-            icon: const Icon(Icons.work_outline),
-            selectedIcon: const Icon(Icons.work),
-            label: 'Jobs'.hardcoded,
+            icon: const Icon(Icons.home_outlined),
+            selectedIcon: const Icon(Icons.home),
+            label: 'home'.tr(context),
           ),
+          // My Tickets
           NavigationDestination(
-            icon: const Icon(Icons.view_headline_outlined),
-            selectedIcon: const Icon(Icons.view_headline),
-            label: 'Entries'.hardcoded,
+            icon: const Icon(Icons.confirmation_number_outlined),
+            selectedIcon: const Icon(Icons.confirmation_number),
+            label: 'my_tickets'.tr(context),
           ),
+          // Notifications
+          NavigationDestination(
+            icon: const Icon(Icons.notifications_outlined),
+            selectedIcon: const Icon(Icons.notifications),
+            label: 'notifications'.tr(context),
+          ),
+          // Account
           NavigationDestination(
             icon: const Icon(Icons.person_outline),
             selectedIcon: const Icon(Icons.person),
-            label: 'Account'.hardcoded,
+            label: 'profile'.tr(context),
           ),
         ],
         onDestinationSelected: onDestinationSelected,
@@ -105,20 +113,29 @@ class ScaffoldWithNavigationRail extends StatelessWidget {
             onDestinationSelected: onDestinationSelected,
             labelType: NavigationRailLabelType.all,
             destinations: <NavigationRailDestination>[
+              // Home
               NavigationRailDestination(
-                icon: const Icon(Icons.work_outline),
-                selectedIcon: const Icon(Icons.work),
-                label: Text('Jobs'.hardcoded),
+                icon: const Icon(Icons.home_outlined),
+                selectedIcon: const Icon(Icons.home),
+                label: Text('home'.tr(context)),
               ),
+              // My Tickets
               NavigationRailDestination(
-                icon: const Icon(Icons.view_headline_outlined),
-                selectedIcon: const Icon(Icons.view_headline),
-                label: Text('Entries'.hardcoded),
+                icon: const Icon(Icons.confirmation_number_outlined),
+                selectedIcon: const Icon(Icons.confirmation_number),
+                label: Text('my_tickets'.tr(context)),
               ),
+              // Notifications
+              NavigationRailDestination(
+                icon: const Icon(Icons.notifications_outlined),
+                selectedIcon: const Icon(Icons.notifications),
+                label: Text('notifications'.tr(context)),
+              ),
+              // Account
               NavigationRailDestination(
                 icon: const Icon(Icons.person_outline),
                 selectedIcon: const Icon(Icons.person),
-                label: Text('Account'.hardcoded),
+                label: Text('profile'.tr(context)),
               ),
             ],
           ),

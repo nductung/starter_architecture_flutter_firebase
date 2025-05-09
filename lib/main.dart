@@ -2,8 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:starter_architecture_flutter_firebase/firebase_options.dart';
 import 'package:starter_architecture_flutter_firebase/src/app.dart';
+import 'package:starter_architecture_flutter_firebase/src/localization/app_locale_provider.dart';
+import 'package:starter_architecture_flutter_firebase/src/localization/app_localizations.dart';
 import 'package:starter_architecture_flutter_firebase/src/localization/string_hardcoded.dart';
 // ignore:depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -17,9 +20,21 @@ Future<void> main() async {
   registerErrorHandlers();
   // * Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // * Initialize date formatting for Vietnamese locale
+  await initializeDateFormatting('vi_VN', null);
+  
+  // * Get saved locale from preferences
+  final initialLocale = await AppLocalizations.getSavedLocale();
+  
   // * Entry point of the app
-  runApp(const ProviderScope(
-    child: MyApp(),
+  runApp(ProviderScope(
+    overrides: [
+      // Override the initial locale with the saved one
+      appLocaleProvider.overrideWith(
+        (ref) => AppLocaleNotifier()..changeLocale(initialLocale.languageCode),
+      ),
+    ],
+    child: const MyApp(),
   ));
 }
 
@@ -39,7 +54,7 @@ void registerErrorHandlers() {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text('An error occurred'.hardcoded),
+        title: Text('error_occurred'.hardcoded),
       ),
       body: Center(child: Text(details.toString())),
     );
