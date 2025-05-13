@@ -6,8 +6,8 @@ import 'dart:ui';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../constants/app_sizes.dart';
 import '../data/trip_repository.dart';
-import '../domain/trip_model.dart';
 import 'ticket_booking_screen.dart';
+import '../domain/trip_model.dart';
 
 class TripListScreen extends ConsumerStatefulWidget {
   const TripListScreen({
